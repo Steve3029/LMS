@@ -44,17 +44,17 @@ export const fetchAllCategories = () => {
   return axios("/course/findallcats");
 }
 
-export const fetchCourses = (page = 1, pageSize = 10, catId) => {
+export const FetchData = (endPointUrl) => {
+  return axios(endPointUrl);
+}
+
+export const getFetchCoursesUrl = (page, 
+  pageSize, catId) => {
   let remoteUrl = "/course/";
   if (catId == null) 
-    remoteUrl = remoteUrl.concat("findallcourses");
+    remoteUrl = remoteUrl.concat(`findallcourses/?page=${page}&pagesize=${pageSize}`);
   else 
-    remoteUrl = remoteUrl.concat(`findcourses/${catId}`);
+    remoteUrl = remoteUrl.concat(`findcourses/${catId}?page=${page}&pagesize=${pageSize}`);
   
-  return axios(remoteUrl, {
-    params: {
-      page,
-      pageSize
-    }
-  });
+  return remoteUrl;
 }
